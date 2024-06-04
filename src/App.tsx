@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, Input, Tab, Tabs } from '@nextui-org/react'
+import { Avatar, Button, Card, CardBody, Input, Tab, Tabs } from '@nextui-org/react'
 import { ContactRound, PenTool } from 'lucide-react'
 
 const App = () => {
@@ -6,6 +6,10 @@ const App = () => {
     <div className="flex flex-col items-center justify-center w-full h-screen">
       <Card className="max-w-full w-[340px]">
         <CardBody className="overflow-hidden">
+          <div className='w-full flex flex-col items-center gap-y-2 justify-center my-4'>
+            <Avatar isBordered color="primary" radius="full" showFallback name='Σ' className="w-20 h-20 text-large" src="https://i.ibb.co/nRyJXF7/sigma.png" />
+            <span className='text-xl text-gray-700'>E Wisdom Institiute</span>
+          </div>
           <Tabs
             color="primary"
             variant="bordered"
