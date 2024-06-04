@@ -1,79 +1,55 @@
-import { Tabs, Tab, Input, Link, Button } from "@nextui-org/react";
-import { Contact, PencilRuler } from 'lucide-react';
-import { useState } from 'react';
+import { Button, Card, CardBody, Input, Tab, Tabs } from '@nextui-org/react'
+import { ContactRound, PenTool } from 'lucide-react'
 
-export default function App() {
-  const [selected, setSelected] = useState<React.Key>("student");
-
+const App = () => {
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="flex flex-col">
-        <Tabs aria-label="Options" color="primary"
-          selectedKey={selected.toString()}
-          onSelectionChange={setSelected}
-        >
-          <Tab
-            key="student"
-            title={
+    <div className="flex flex-col items-center justify-center w-full h-screen">
+      <Card className="max-w-full w-[340px]">
+        <CardBody className="overflow-hidden">
+          <Tabs
+            color="primary"
+            variant="bordered"
+            fullWidth
+            size="md"
+            aria-label="Tabs form"
+          >
+            <Tab key="login" title={
               <div className="flex items-center space-x-2">
-                <Contact />
+                <ContactRound />
                 <span>Student</span>
-              </div>
-            }
-          >
-            <form className="flex flex-col gap-4">
-              <Input isRequired label="Email" placeholder="Enter your email" type="email" />
-              <Input
-                isRequired
-                label="Password"
-                placeholder="Enter your password"
-                type="password"
-              />
-              <p className="text-center text-small">
-                Need to create an account?{" "}
-                <Link size="sm" onPress={() => setSelected("sign-up")}>
-                  Sign up
-                </Link>
-              </p>
-              <div className="flex gap-2 justify-end">
-                <Button fullWidth color="primary">
-                  Login
-                </Button>
-              </div>
-            </form>
-          </Tab>
-          <Tab
-            key="editor"
-            title={
+              </div>}
+            >
+              <form className="flex flex-col gap-4">
+                <Input isRequired label="Email" placeholder="Enter your email" type="email" />
+                <Input isRequired label="Password" placeholder="Enter your password" type="password" />
+                <div className="flex gap-2 justify-end">
+                  <Button fullWidth color="primary">
+                    Login
+                  </Button>
+                </div>
+              </form>
+            </Tab>
+            <Tab key="sign-up" title={
               <div className="flex items-center space-x-2">
-                <PencilRuler />
+                <PenTool />
                 <span>Editor</span>
-              </div>
-            }
-          >
-            <form className="flex flex-col gap-4">
-              <Input isRequired label="Email" placeholder="Enter your email" type="email" />
-              <Input
-                isRequired
-                label="Password"
-                placeholder="Enter your password"
-                type="password"
-              />
-              <p className="text-center text-small">
-                Need to create an account?{" "}
-                <Link size="sm" onPress={() => setSelected("sign-up")}>
-                  Sign up
-                </Link>
-              </p>
-              <div className="flex gap-2 justify-end">
-                <Button fullWidth color="primary">
-                  Login
-                </Button>
-              </div>
-            </form>
-          </Tab>
-        </Tabs>
-      </div>
+              </div>}
+            >
+              <form className="flex flex-col gap-4">
+                <Input isRequired label="Email" placeholder="Enter your email" type="email" />
+                <Input isRequired label="Password" placeholder="Enter your password" type="password" />
+                <div className="flex gap-2 justify-end">
+                  <Button fullWidth color="primary">
+                    Login
+                  </Button>
+                </div>
+              </form>
+            </Tab>
+          </Tabs>
+        </CardBody>
+      </Card>
     </div>
-  );
+  )
 }
+
+export default App
