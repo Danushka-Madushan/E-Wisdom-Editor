@@ -1,5 +1,6 @@
 import { Button, Input, Link, Spinner } from '@nextui-org/react'
 import { Dispatch, Key, SetStateAction, useState } from 'react'
+import toast from 'react-hot-toast'
 
 const TabKeys = ['student', 'editor'] as const
 
@@ -28,6 +29,7 @@ const LoginForm = ({ email, password, onFormChange, ActiveTab, SetNoNActiveTab }
         <Button onClick={() => setLoading((prev) => {
           if (!prev) {
             SetNoNActiveTab(TabKeys.filter(item => item !== ActiveTab))
+            toast.success('Successfully Authenticated')
             return !prev
           }
           SetNoNActiveTab([])
