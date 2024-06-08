@@ -12,10 +12,8 @@ const LoginModel = () => {
   const [NoNActiveTab, SetNoNActiveTab] = useState<Array<'student' | 'editor'>>([])
   const [ActiveTab, SetActiveTab] = useState<Key>('student')
 
-  const onFormChange = (target: HTMLInputElement) => {
-    const { type, value } = target
-    setFormState({
-      ...formState,
+  const onFormChange = ({ type, value }: HTMLInputElement) => {
+    setFormState({ ...formState,
       [type]: value
     })
   }
