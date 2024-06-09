@@ -1,5 +1,6 @@
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button } from "@nextui-org/react";
 import toast from 'react-hot-toast';
+import { useAuth } from '../../hooks/useAuth';
 
 interface LogoutModelProps {
   isOpen: boolean,
@@ -7,6 +8,8 @@ interface LogoutModelProps {
 }
 
 const LogoutModel = ({ isOpen, onClose }: LogoutModelProps) => {
+  const AuthContext = useAuth()
+
   return (
     <Modal size='xs' placement='center' backdrop='blur' isOpen={isOpen} onClose={onClose}>
       <ModalContent>
@@ -21,8 +24,9 @@ const LogoutModel = ({ isOpen, onClose }: LogoutModelProps) => {
                 Cancel
               </Button>
               <Button color="danger" variant="light" onPress={() => {
+                onClose();
+                AuthContext.logout && AuthContext.logout()
                 toast.success('Success')
-                onClose()
               }}>
                 Confirm
               </Button>
