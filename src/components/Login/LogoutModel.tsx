@@ -20,7 +20,7 @@ const LogoutModel = ({ isOpen, onClose }: LogoutModelProps) => {
               <span className='text-base font-[Roboto]'>Are you sure you want to log out?</span>
             </ModalBody>
             <ModalFooter>
-              <Button color="primary" onPress={onClose}>
+              <Button color="primary" variant='flat' onPress={onClose}>
                 Cancel
               </Button>
               <Button color="danger" variant="light" onPress={() => {
