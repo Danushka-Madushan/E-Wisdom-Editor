@@ -32,7 +32,7 @@ const Sidebar = () => {
         })}
       </CardBody>
       <div className='flex justify-center'>
-        <Button onClick={onOpen} variant='bordered' color='primary' className='font-[Roboto]'><LogoutIcon size={24} />Sign out</Button>
+        <Button onPress={onOpen} variant='bordered' color='primary' className='font-[Roboto]'><LogoutIcon size={24} />Sign out</Button>
         <LogoutModel isOpen={isOpen} onClose={onClose}/>
       </div>
       <span className='my-4 text-sm text-gray-400 font-[Roboto] text-center'>
