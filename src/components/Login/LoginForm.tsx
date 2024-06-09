@@ -1,6 +1,8 @@
 import { Button, Input, Link, Spinner } from '@nextui-org/react'
 import { Dispatch, Key, SetStateAction, useState } from 'react'
 import toast from 'react-hot-toast'
+import { useAuth } from '../../hooks/useAuth'
+import { useNavigate } from 'react-router-dom'
 
 const TabKeys = ['student', 'editor'] as const
 
@@ -14,6 +16,8 @@ interface LoginFormProps {
 
 const LoginForm = ({ email, password, onFormChange, ActiveTab, SetNoNActiveTab }: LoginFormProps) => {
   const [isLoading, setLoading] = useState(false)
+  const { login } = useAuth()
+  const Navigate = useNavigate()
 
   return (
     <form className="flex flex-col gap-4">
@@ -29,7 +33,11 @@ const LoginForm = ({ email, password, onFormChange, ActiveTab, SetNoNActiveTab }
         <Button onClick={() => setLoading((prev) => {
           if (!prev) {
             SetNoNActiveTab(TabKeys.filter(item => item !== ActiveTab))
-            toast.success('Successfully Authenticated')
+            if (login) {
+              login()
+              Navigate('/', { replace: true })
+              toast.success('Successfully Authenticated')
+            }
             return !prev
           }
           SetNoNActiveTab([])
