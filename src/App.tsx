@@ -13,6 +13,9 @@ import Dashboard from './pages/Dashboard';
 import AuthProvider from './context/AuthContext';
 import ProtectedRoute from './context/ProtectedRoute';
 import LoginModel from './components/Login/LoginModel';
+import toast, { useToasterStore } from 'react-hot-toast';
+import { useEffect } from 'react';
+import { TOAST_LIMIT } from './config/config';
 
 const Routers = [
   {
@@ -56,6 +59,16 @@ const App = () => {
 }
 
 const ProtectedApp = () => {
+  /* Obtained From https://github.com/timolins/react-hot-toast/issues/31#issuecomment-803359550 */
+  const { toasts } = useToasterStore();
+  
+  useEffect(() => {
+    toasts
+      .filter((t) => t.visible) // Only consider visible toasts
+      .filter((_, i) => i >= TOAST_LIMIT) // Is toast index over limit?
+      .forEach((t) => toast.dismiss(t.id)); // Dismiss – Use toast.remove(t.id) for no exit animation
+  }, [toasts]);
+  
   return (
     <AuthProvider>
       <App />
