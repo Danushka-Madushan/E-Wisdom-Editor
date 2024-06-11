@@ -10,8 +10,8 @@ import Subscriptions from './pages/Subscriptions';
 import Courses from './pages/Courses';
 import Videos from './pages/Videos';
 import Dashboard from './pages/Dashboard';
-import AuthProvider from './Auth/AuthContext';
-import ProtectedRoute from './Auth/ProtectedRoute';
+import AuthProvider from './context/AuthContext';
+import ProtectedRoute from './context/ProtectedRoute';
 import LoginModel from './components/Login/LoginModel';
 
 const Routers = [
