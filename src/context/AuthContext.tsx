@@ -1,6 +1,13 @@
 import { createContext, ReactNode, useState } from 'react'
 
-export const AuthContext = createContext<{ isAuthenticated?: boolean, login?: () => void, logout?: () => void }>({})
+export const AuthContext = createContext<{
+  isAuthenticated?: boolean,
+  login?: () => void,
+  logout?: () => void,
+  authHeaders?: {
+    token: string
+  }
+}>({})
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
