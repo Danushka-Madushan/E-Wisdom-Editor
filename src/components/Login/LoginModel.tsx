@@ -11,6 +11,10 @@ const LoginModel = () => {
 
   const [NoNActiveTab, SetNoNActiveTab] = useState<Array<'student' | 'editor'>>([])
   const [ActiveTab, SetActiveTab] = useState<Key>('student')
+  const [isInvalid, setInvalid] = useState({
+    email: false,
+    password: false
+  })
 
   const onFormChange = ({ type, value }: HTMLInputElement) => {
     setFormState({ ...formState,
@@ -43,7 +47,7 @@ const LoginModel = () => {
                 <span>Student</span>
               </div>}
             >
-              <LoginForm email={formState.email} password={formState.password} onFormChange={onFormChange} ActiveTab={ActiveTab} SetNoNActiveTab={SetNoNActiveTab} />
+              <LoginForm email={formState.email} password={formState.password} onFormChange={onFormChange} setInvalid={setInvalid} isInvalid={isInvalid} ActiveTab={ActiveTab} SetNoNActiveTab={SetNoNActiveTab} />
             </Tab>
             <Tab key="editor" title={
               <div className="flex items-center space-x-2">
@@ -51,7 +55,7 @@ const LoginModel = () => {
                 <span>Editor</span>
               </div>}
             >
-              <LoginForm email={formState.email} password={formState.password} onFormChange={onFormChange} ActiveTab={ActiveTab} SetNoNActiveTab={SetNoNActiveTab} />
+              <LoginForm email={formState.email} password={formState.password} onFormChange={onFormChange} setInvalid={setInvalid} isInvalid={isInvalid} ActiveTab={ActiveTab} SetNoNActiveTab={SetNoNActiveTab} />
             </Tab>
           </Tabs>
         </CardBody>
