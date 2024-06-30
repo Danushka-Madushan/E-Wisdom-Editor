@@ -1,4 +1,4 @@
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button } from "@nextui-org/react";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 import { Fragment } from 'react/jsx-runtime';
 import SigmaIogo from '../Icons/SigmaIcon';
 import NameCardIcon from '../Icons/NameCardIcon';
@@ -9,6 +9,9 @@ import { useState } from 'react';
 import SigninFormField from './SigninFormField';
 import toast from 'react-hot-toast';
 import SpinnerIcon from '../Icons/SpinnerIcon';
+import useAxios from '../../hooks/useAxios';
+import Confirmation from './Confirmation';
+
 
 interface SigninModelProps {
   isOpen: boolean,
@@ -62,8 +65,13 @@ const SigninModel = ({ isOpen, onOpenChange }: SigninModelProps) => {
   const [formContent, setFormContent] = useState<iSigninFormContent>({})
   const [InputFieldStatus, setInputFieldStatus] = useState<{ [key in InputFieldsIds]: boolean }>(InitialFieldStatus)
 
-  /* isLoading */
-  const [isLoading] = useState(false)
+  /* Request */
+  const { isLoading, request } = useAxios()
+  const { email, name, password, phone } = formContent
+  const [confirm_mail, setConfirmMail] = useState(email)
+
+  /* Confirmation */
+  const { isOpen: ConfirmationisOpen, onOpen: ConfirmationonOpen, onOpenChange: ConfirmationonOpenChange } = useDisclosure();
 
   return (
     <Fragment>
@@ -88,20 +96,30 @@ const SigninModel = ({ isOpen, onOpenChange }: SigninModelProps) => {
                 <Button color="danger" variant="light" onPress={onClose}>
                   Cancel
                 </Button>
-                <Button color="primary" className='w-20' onPress={() => {
+                <Button color="primary" className='w-20' onPress={async () => {
                   if (Object.values(InputFieldStatus).every(value => value)) {
-                    console.log(formContent, InputFieldStatus);
-                    return onClose()
+                    const { success } = await request({
+                      endpoint: '/auth/signup',
+                      method: 'POST',
+                      data: { name, email, phone: phone?.slice(1), password }
+                    })
+                    if (success) {
+                      setConfirmMail(email)
+                      onClose();
+                      ConfirmationonOpen();
+                      return
+                    }
                   }
                   return toast.error('All Fields Required!')
                 }}>
-                  { isLoading ? <SpinnerIcon size={22} /> : 'Register'}
+                  {isLoading ? <SpinnerIcon size={22} /> : 'Register'}
                 </Button>
               </ModalFooter>
             </Fragment>
           )}
         </ModalContent>
       </Modal>
+      <Confirmation isOpen={ConfirmationisOpen} email={confirm_mail} onOpenChange={ConfirmationonOpenChange} />
     </Fragment>
   );
 }
