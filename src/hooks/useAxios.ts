@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from './useAuth';
 
 interface AxiosRequest {
-    endpoint: string,
+    endpoint: `/${ string }`,
     method: "GET" | "POST",
     data?: object,
     message?: string,
