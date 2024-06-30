@@ -2,7 +2,7 @@ import SidebarItem from './SidebarItem'
 import { Button, Card, CardBody, Divider, Tooltip } from '@nextui-org/react'
 import { useDisclosure } from "@nextui-org/react";
 import { Fragment } from 'react/jsx-runtime'
-import { SidebarNavContent } from '../../constants/config'
+import { SidebarNavContent } from '../../constants/content'
 import { Link } from 'react-router-dom'
 import SigmaLogo from '../Icons/SigmaIcon'
 import HeartIcon from '../Icons/HeartIcon'
